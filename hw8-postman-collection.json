@@ -1,0 +1,627 @@
+{
+	"info": {
+		"_postman_id": "5a13199b-31a6-45d2-9dd8-2e1b0e103f62",
+		"name": "hw8-postman-collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50241720",
+		"_collection_link": "https://mantogin-2217932.postman.co/workspace/Anton-Malmygin's-Workspace~da479b08-9671-4a9a-8f34-a9a19ba5c590/collection/50241720-5a13199b-31a6-45d2-9dd8-2e1b0e103f62?action=share&source=collection_link&creator=50241720"
+	},
+	"item": [
+		{
+			"name": "createAccount",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const response = pm.response.text();\r",
+							"pm.collectionVariables.set(\"account\", response);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeAccountBalance",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "100",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addProduct",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const productName = pm.variables.replaceIn('{{$randomProductName}}');\r",
+							"pm.collectionVariables.set(\"productName\", productName);"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{{productName}}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8004/warehouse/products",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8004",
+					"path": [
+						"warehouse",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "changeProductQuantity",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "10",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8004/warehouse/products/{{productName}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8004",
+					"path": [
+						"warehouse",
+						"products",
+						"{{productName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание хорошего заказа",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": {{account}},\r\n    \"amount\": 50,\r\n    \"productName\": \"{{productName}}\",\r\n    \"productQuantity\": 5,\r\n    \"deliveryTimeSlot\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8003/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8003",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductQuantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8004/warehouse/products/{{productName}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8004",
+					"path": [
+						"warehouse",
+						"products",
+						"{{productName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeliveryTimeSlotStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/delivery/time/1",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"delivery",
+						"time",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание заказа с доставкой в занятый временной слот",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": {{account}},\r\n    \"amount\": 50,\r\n    \"productName\": \"{{productName}}\",\r\n    \"productQuantity\": 5,\r\n    \"deliveryTimeSlot\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8003/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8003",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductQuantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8004/warehouse/products/{{productName}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8004",
+					"path": [
+						"warehouse",
+						"products",
+						"{{productName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeliveryTimeSlotStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/delivery/time/1",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"delivery",
+						"time",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание заказа превышающего остатки продукта на складе",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": {{account}},\r\n    \"amount\": 50,\r\n    \"productName\": \"{{productName}}\",\r\n    \"productQuantity\": 15,\r\n    \"deliveryTimeSlot\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8003/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8003",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductQuantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8004/warehouse/products/{{productName}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8004",
+					"path": [
+						"warehouse",
+						"products",
+						"{{productName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeliveryTimeSlotStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/delivery/time/1",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"delivery",
+						"time",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Создание заказа превышающего остаток на счете",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"accountNumber\": {{account}},\r\n    \"amount\": 150,\r\n    \"productName\": \"{{productName}}\",\r\n    \"productQuantity\": 5,\r\n    \"deliveryTimeSlot\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8003/orders",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8003",
+					"path": [
+						"orders"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAccountBalance",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8001/billing/account/{{account}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8001",
+					"path": [
+						"billing",
+						"account",
+						"{{account}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getProductQuantity",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8004/warehouse/products/{{productName}}",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8004",
+					"path": [
+						"warehouse",
+						"products",
+						"{{productName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getDeliveryTimeSlotStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/delivery/time/1",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"delivery",
+						"time",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cleanDeliveryTimeSlotStatus",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "false",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://{{baseUrl}}:8002/delivery/time/1",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"port": "8002",
+					"path": [
+						"delivery",
+						"time",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"console.log(\"---------------------------------------\");\r",
+					"console.log(\"URL: \" + pm.request.url.toString());\r",
+					"console.log(\"--- REQUEST ---\");\r",
+					"console.log(\"Method: \" + pm.request.method);\r",
+					"console.log(\"Headers: \" + JSON.stringify(pm.request.headers));\r",
+					"if (pm.request.body) {\r",
+					"    console.log(\"Body: \" + pm.request.body.toString());\r",
+					"} else {\r",
+					"    console.log(\"Body: \");\r",
+					"}"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"console.log(\"--- RESPONSE ---\");\r",
+					"console.log(\"Status: \" + pm.response.code);\r",
+					"console.log(\"Body: \" + pm.response.text());\r",
+					"console.log(\"---------------------------------------\");"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "arch.homework"
+		},
+		{
+			"key": "account",
+			"value": ""
+		},
+		{
+			"key": "productName",
+			"value": ""
+		}
+	]
+}

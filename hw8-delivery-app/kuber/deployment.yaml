@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw8-delivery-app
+  namespace: mantogin-hw8
+  labels:
+    app: hw8-delivery-app
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: hw8-delivery-app
+  template:
+    metadata:
+      labels:
+        app: hw8-delivery-app
+    spec:
+      containers:
+        - name: hw8-delivery-app
+          image: mantogin/hw8-delivery-app:1.0.0
+          ports:
+            - containerPort: 8002

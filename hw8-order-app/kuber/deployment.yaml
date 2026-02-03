@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw8-order-app
+  namespace: mantogin-hw8
+  labels:
+    app: hw8-order-app
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: hw8-order-app
+  template:
+    metadata:
+      labels:
+        app: hw8-order-app
+    spec:
+      containers:
+        - name: hw8-order-app
+          image: mantogin/hw8-order-app:1.0.0
+          ports:
+            - containerPort: 8003

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: billing-load-balancer
+  labels:
+    app: billing-load-balancer
+  namespace: mantogin-hw8
+spec:
+  selector:
+    app: hw8-billing-app
+  ports:
+    - protocol: TCP
+      name: metrics
+      port: 8001
+      targetPort: 8001
+  type: LoadBalancer

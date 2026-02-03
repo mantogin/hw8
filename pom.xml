@@ -1,0 +1,16 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>ru.mantogin.hw8</groupId>
+    <artifactId>mantogin-hw8</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>hw8-order-app</module>
+        <module>hw8-billing-app</module>
+        <module>hw8-warehouse-app</module>
+        <module>hw8-delivery-app</module>
+    </modules>
+
+    <!-- Common dependencies, build plugins, etc. -->
+</project>

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hw8-warehouse-app
+  namespace: mantogin-hw8
+  labels:
+    app: hw8-warehouse-app
+spec:
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: hw8-warehouse-app
+  template:
+    metadata:
+      labels:
+        app: hw8-warehouse-app
+    spec:
+      containers:
+        - name: hw8-warehouse-app
+          image: mantogin/hw8-warehouse-app:1.0.0
+          ports:
+            - containerPort: 8004

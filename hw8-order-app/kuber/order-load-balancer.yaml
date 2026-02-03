@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: order-load-balancer
+  labels:
+    app: order-load-balancer
+  namespace: mantogin-hw8
+spec:
+  selector:
+    app: hw8-order-app
+  ports:
+    - protocol: TCP
+      name: metrics
+      port: 8003
+      targetPort: 8003
+  type: LoadBalancer
